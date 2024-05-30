@@ -50,15 +50,17 @@ class CurrencyFacadeTest {
     void should_throw_exception_when_user_try_to_get_invalid_code_currency_value() {
 
         // given
+        final String invalidCode = "EXAMPLE";
         CurrencyValueRequestDto currencyValueRequestDto = new CurrencyValueRequestDto(
-                "EXAMPLE",
+                invalidCode,
                 "John Doe"
         );
 
         // when
         // then
         assertThrows(InvalidCurrencyException.class,
-                () -> currencyFacade.getCurrencyValue(currencyValueRequestDto));
+                () -> currencyFacade.getCurrencyValue(currencyValueRequestDto),
+                "Invalid currency code:" + invalidCode);
     }
 
     @Test
