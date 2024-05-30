@@ -21,7 +21,7 @@ class CurrencyService {
                 .name(currencyValueRequestDto.name())
                 .currency(currencyCode)
                 .date(LocalDateTime.now())
-                .value(fetchCurrencyRate(currencyCode))
+                .currencyValue(fetchCurrencyRate(currencyCode))
                 .build();
 
         return currencyRepository.save(currencyRequest);

@@ -1,11 +1,8 @@
 package com.exchratenbp.domain.currency;
 
-import java.util.List;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-interface CurrencyRepository {
-
-    CurrencyRequest save(CurrencyRequest currencyRequest);
-
-    List<CurrencyRequest> findAll();
-
+@Repository
+interface CurrencyRepository extends JpaRepository<CurrencyRequest, Long> {
 }

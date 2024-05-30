@@ -3,6 +3,7 @@ package com.exchratenbp.domain.currency;
 import com.exchratenbp.domain.currency.dto.CurrencyRequestDto;
 import com.exchratenbp.domain.currency.dto.CurrencyResponse;
 import com.exchratenbp.domain.currency.dto.CurrencyValueRequestDto;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 
 import java.util.List;
@@ -20,6 +21,7 @@ public class CurrencyFacade {
                 .toList();
     }
 
+    @Transactional
     public CurrencyResponse getCurrencyValue(CurrencyValueRequestDto currencyValueRequestDto) {
 
         final CurrencyRequestDto currencyRequestDto = currencyService
