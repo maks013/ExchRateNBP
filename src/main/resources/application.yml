@@ -5,3 +5,11 @@ spring:
     url: jdbc:h2:file:./exchratenbp
   jpa.hibernate:
     ddl-auto: update
+
+currency:
+  http:
+    client:
+      config:
+        connectionTimeout: 1000
+        readTimeout: 1000
+        uri: http://api.nbp.pl/api/exchangerates/tables/A?format=json
