@@ -1,0 +1,7 @@
+spring:
+  h2.console:
+    enabled: false
+  datasource:
+    url: jdbc:h2:file:./exchratenbp
+  jpa.hibernate:
+    ddl-auto: update
