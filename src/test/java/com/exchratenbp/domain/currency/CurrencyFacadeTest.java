@@ -2,6 +2,7 @@ package com.exchratenbp.domain.currency;
 
 import com.exchratenbp.domain.currency.dto.CurrencyResponse;
 import com.exchratenbp.domain.currency.dto.CurrencyValueRequestDto;
+import com.exchratenbp.domain.currency.exception.EmptyNameException;
 import com.exchratenbp.domain.currency.exception.InvalidCurrencyException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -77,5 +78,65 @@ class CurrencyFacadeTest {
 
         // then
         assertEquals(3.95, currencyResponse.value());
+    }
+
+    @Test
+    void should_throw_exception_when_user_try_to_get_currency_with_empty_name() {
+
+        // given
+        CurrencyValueRequestDto currencyValueRequestDto = new CurrencyValueRequestDto(
+                "USD",
+                ""
+        );
+
+        // when
+        // then
+        assertThrows(EmptyNameException.class, () -> currencyFacade.getCurrencyValue(currencyValueRequestDto),
+                "Name can not be empty or null");
+    }
+
+    @Test
+    void should_throw_exception_when_user_try_to_get_currency_with_name_equals_null() {
+
+        // given
+        CurrencyValueRequestDto currencyValueRequestDto = CurrencyValueRequestDto.builder()
+                .currency("USD")
+                .build();
+
+        // when
+        // then
+        assertThrows(EmptyNameException.class, () -> currencyFacade.getCurrencyValue(currencyValueRequestDto),
+                "Name can not be empty or null");
+    }
+
+    @Test
+    void should_throw_exception_when_user_try_to_get_currency_value_with_empty_code() {
+
+        // given
+        final String emptyCode = "";
+
+        CurrencyValueRequestDto currencyValueRequestDto = new CurrencyValueRequestDto(
+                emptyCode,
+                "John Doe"
+        );
+
+        // when
+        // then
+        assertThrows(InvalidCurrencyException.class, () -> currencyFacade.getCurrencyValue(currencyValueRequestDto),
+                "Invalid currency code: " + "empty or null");
+    }
+
+    @Test
+    void should_throw_exception_when_user_try_to_get_currency_value_with_code_equals_null() {
+
+        // given
+        CurrencyValueRequestDto currencyValueRequestDto = CurrencyValueRequestDto.builder()
+                .name("John Doe")
+                .build();
+
+        // when
+        // then
+        assertThrows(InvalidCurrencyException.class, () -> currencyFacade.getCurrencyValue(currencyValueRequestDto),
+                "Invalid currency code: " + "empty or null");
     }
 }
