@@ -1,11 +1,16 @@
 spring:
-  h2.console:
-    enabled: false
   datasource:
-    url: jdbc:h2:file:./exchratenbp
-  jpa.hibernate:
-    ddl-auto: update
-
+    url: jdbc:postgresql://localhost:5332/postgres
+    username: user
+    password: password
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+    show-sql: true
 currency:
   http:
     client:
